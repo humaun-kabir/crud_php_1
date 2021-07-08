@@ -61,6 +61,45 @@
         </form>
     </div>
 
+    <div class="container m-5 p-3">
+        <form action="" method="post" class="d-flex justify-content-around">
+            <?php
+                if(isset($_GET['update'])){
+                    $stdid = $_GET['update'];
+                    $query = "SELECT * FROM student WHERE id={$stdid}";
+                    $getdata = mysqli_query($conn,$query);
+                    while($update = mysqli_fetch_assoc($getdata)){
+                        $stdid = $update['id'];
+                        $stdname = $update['stdname'];
+                        $stdreg = $update['stdreg'];
+                
+
+            ?>
+
+            <input class="form-control" type="text" name="stdname" value="<?php echo $stdname ?>">
+            <input class="form-control" type="number" name="stdreg" value="<?php echo $stdreg ?>">
+            <input class="btn btn-primary" type="submit" value="Update" name="update_btn">
+            <?php } }  ?>
+
+            <?php
+                if(isset($_POST['update_btn'])){
+                    $stdname = $_POST['stdname'];
+                    $stdreg = $_POST['stdreg'];
+
+                    $query = "UPDATE student 
+                    SET stdname='$stdname', stdreg=$stdreg 
+                    where id=$stdid";
+                    $updatequery = mysqli_query($conn,$query);
+                    if($updatequery){
+                        echo "data updated";
+                    }
+                }
+
+            ?>
+
+        </form>
+    </div>
+
     <div class="container">
         <table class="table table-bordered">
             <tr>
@@ -88,7 +127,7 @@
                 <td><?php echo $stdid; ?></td>
                 <td><?php echo $stdname; ?></td>
                 <td><?php echo $stdreg; ?></td>
-                <td></td>
+                <td><a href="index.php?update=<?php echo $stdid; ?>" class="btn btn-success">Update</a></td>
                 <td><a href="index.php?delete=<?php echo $stdid; ?>" class="btn btn-danger">Delete</a></td>
                 
             </tr>

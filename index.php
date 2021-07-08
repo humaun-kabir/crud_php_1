@@ -47,6 +47,44 @@
         </form>
     </div>
 
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <th>Std ID</th>
+                <th>Std Name</th>
+                <th>Reg</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            <?php
+                $query = "SELECT * FROM student";
+                $readquery = mysqli_query($conn,$query);
+                if($readquery->num_rows > 0){
+                    while($read = mysqli_fetch_assoc($readquery)){
+                        $stdid = $read['id'];
+                        $stdname = $read['stdname'];
+                        $stdreg = $read['stdreg'];
+                    
+
+
+            ?>
+
+            <tr>
+                <td><?php echo $stdid; ?></td>
+                <td><?php echo $stdname; ?></td>
+                <td><?php echo $stdreg; ?></td>
+                <td></td>
+                <td></td>
+                
+            </tr>
+
+            <?php } } else{
+                echo "No data to show";
+            } ?>
+        </table>
+    </div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

@@ -22,6 +22,20 @@
     }
 ?>
 
+<?php
+    if(isset($_GET['delete'])){
+        $stdid = $_GET['delete'];
+        $query = "DELETE FROM student where id={$stdid}";
+        $deletequery = mysqli_query($conn,$query);
+        if($deletequery){
+            echo "Data deleted successfully";
+        }
+    }
+
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -75,7 +89,7 @@
                 <td><?php echo $stdname; ?></td>
                 <td><?php echo $stdreg; ?></td>
                 <td></td>
-                <td></td>
+                <td><a href="index.php?delete=<?php echo $stdid; ?>" class="btn btn-danger">Delete</a></td>
                 
             </tr>
 
